@@ -1,0 +1,184 @@
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; 
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px; 
+  }
+}
+
+
+body {
+  background-color: var(--wood-bg);
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header, .footer {
+  font-family: var(--font-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(./assets/woodHorizon.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 3rem;
+  box-shadow: var(--shadow-wood);
+}
+
+.header h1, .footer p {
+  font-family: var(--font-main);
+  font-size: 1.8rem;
+  color: transparent;
+  background-image: url(./assets/fireWood.webp);
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 1px 1px 2px var(--wood-shadow);
+}
+.main {
+  position: relative;
+  flex: 1;
+  padding: 0.5rem 3.5rem 0.5rem 3.5rem;
+  display: grid;
+  grid-template-columns: 250px 1fr; 
+  gap: 20px; 
+  align-items: start;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-around;
+  background: var(--note-bg);
+  padding: 16px;
+  border: 2px solid var(--note-border);
+  box-shadow: var(--shadow-sm), var(--shadow-inset);
+  border-radius: 0;
+  transform: rotate(-1deg);
+  position: relative;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  clip-path: polygon(
+    0% 0%, 
+    90% 0%, 
+    100% 15%, 
+    100% 100%, 
+    10% 100%, 
+    0% 80%
+  );
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-area:hover {
+  transform: rotate(-1.5deg) translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-inset);
+}
+
+.input-area input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--note-border);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 0;
+  font-family: inherit;
+  color: var(--note-text);
+  font-size: 0.95rem;
+}
+
+.input-area input::placeholder {
+  color: var(--note-text);
+  opacity: 1;
+}
+
+.input-area button {
+  background: var(--note-button-bg);
+  border: 1px solid var(--note-button-border);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--note-button-text);
+  border-radius: 0;
+}
+
+.input-area button:hover {
+  background: var(--note-button-border);
+}
+
+
+.input-area input:focus,
+.input-area button:focus {
+  outline: 1px dashed #ccc;
+  outline-offset: 2px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 10px;
+}
+
+/* Адаптивность: на узких экранах — одна колонка */
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr; /* На мобильных — сначала ввод, потом доска */
+    padding: 10px;
+  }
+
+  .input-area {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .board {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+.wood-column {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3rem;
+  background-image: url(./assets/woodVertical.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 4px 0 16px var(--wood-shadow), inset 0 0 0 1px var(--wood-highlight);
+}
+
+.left {
+  left: 0; 
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+}
+
+.right {
+  right: 0;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.2); 
+}
+
+
+@media (max-width: 600px) {
+  .wood-column {
+    display: none;
+  }
+}

@@ -1,0 +1,34 @@
+/* src/index.css */
+:root {
+  /* === 🌲 Цвета древесной рамы === */
+  --wood-bg: #d8c0a8;
+  --wood-border: #d4c89a;
+  --wood-shadow: rgba(0, 0, 0, 0.2);
+  --wood-highlight: rgba(255, 255, 255, 0.3);
+
+  /* === 📝 Цвета стикера (input-area) === */
+  --note-bg: #fff9c4;
+  --note-border: #d4c89a;
+  --note-text: #a7913a;
+  --note-button-bg: #ffeb3b;
+  --note-button-border: #fdd835;
+  --note-button-text: #c2a007;
+
+  /* === 📦 Общие тени и эффекты === */
+  --shadow-sm: 3px 3px 6px var(--wood-shadow);
+  --shadow-md: 4px 4px 10px var(--wood-shadow);
+  --shadow-inset: inset 0 1px 0 var(--wood-highlight);
+  --shadow-wood: 0 4px 16px var(--wood-shadow), var(--shadow-inset);
+
+  /* === 🎨 Шрифты === */
+  --font-main: 'Amad', cursive, sans-serif;
+}
+
+.dark-theme {
+  --wood-bg: #3a2a1a;
+  --wood-border: #5d4037;
+  --note-bg: #f4e5c2;
+  --note-text: #3e2723;
+  --wood-shadow: rgba(0, 0, 0, 0.4);
+  /* и так далее */
+}
