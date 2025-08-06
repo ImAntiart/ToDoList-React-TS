@@ -1,15 +1,24 @@
 import { useState } from 'react'
 import "./App.css";
-/* import AddTodo from './components/AddTodo'
-import TodoList from './components/TodoList' */
+import { Todo } from './components/TodoItem';
+import { AddTodo } from './components/AddTodo';
+
 
 function App() {
 
-/*   const [todos, setTodos] = useState<string[]>([])
+  const [todos, setTodos] = useState<Todo[]>([]);
 
   const handleAddTodo = (text: string) => {
-    setTodos([...todos, text])
-  } */
+    const newTodo = {
+      id: Date.now(),
+      text: text,
+      completed: false,
+      createdAt: new Date(),
+    };
+
+    setTodos([...todos, newTodo]);
+  }
+
 
 
   return (
@@ -21,10 +30,7 @@ function App() {
         <aside className="wood-column left"></aside>
         <aside className="wood-column right"></aside>
 
-        <div className="input-area">
-          <input type="text" placeholder="Новая задача..." />
-          <button>Добавить</button>
-        </div>
+        <AddTodo onAdd={handleAddTodo} />
 
         <div className="board">
           {/* Здесь будут задачи */}
@@ -39,3 +45,6 @@ function App() {
 }
 
 export default App;
+
+
+/* {id: 1, text: "Помыть посуду", completed: false, createdAt: new Date()} */

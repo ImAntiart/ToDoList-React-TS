@@ -1,16 +1,8 @@
 import './TodoItem.css'
 
-interface TodoItemProps {
-  text: string
+export interface Todo {
+  id: number;          
+  text: string;
+  completed: boolean;
+  createdAt: Date;     
 }
-
-function TodoItem({ text }: TodoItemProps) {
-  return (
-    <div className="todo-item">
-      {/* Будем добавлять эффект булавки позже */}
-      <p>{text}</p>
-    </div>
-  )
-}
-
-export default TodoItem
