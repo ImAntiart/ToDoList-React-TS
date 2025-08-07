@@ -10,6 +10,7 @@
   --note-bg: #fff9c4;
   --note-border: #d4c89a;
   --note-text: #a7913a;
+  --note-text-main: #080f4d;
   --note-button-bg: #ffeb3b;
   --note-button-border: #fdd835;
   --note-button-text: #c2a007;
@@ -21,7 +22,8 @@
   --shadow-wood: 0 4px 16px var(--wood-shadow), var(--shadow-inset);
 
   /* === 🎨 Шрифты === */
-  --font-main: 'Amad', cursive, sans-serif;
+  --font-main: 'Amad';
+  --font-item: 'Fet';
 }
 
 .dark-theme {

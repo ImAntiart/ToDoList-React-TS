@@ -1,25 +1,67 @@
-import { useState } from 'react'
+import { useState, useEffect } from "react";
 import "./App.css";
-import { Todo } from './components/TodoItem';
-import { AddTodo } from './components/AddTodo';
-
+import { Todo } from "./components/TodoItem";
+import { AddTodo } from "./components/AddTodo";
+import { TodoList } from "./components/TodoList";
+import { loadTodos, saveTodos } from "./utils/localStorage";
 
 function App() {
+  // Загружаем задачи из localStorage при инициализации
 
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
+
+  // Сохраняем задачи при каждом изменении
+  useEffect(() => {
+    saveTodos(todos);
+  }, [todos]);
+
+  /* 
+  { 
+    id: 1, 
+    text: "Помыть посуду", 
+    completed: false, 
+    createdAt: new Date() 
+  }
+ */
+
+  /*   
+useState<Todo[]>
+Типизирует состояние как массив объектов, соответствующих интерфейсу Todo (из TodoItem.tsx).
+Начальное значение — массив с одной задачей (демо-данные).
+ */
 
   const handleAddTodo = (text: string) => {
+    if (!text.trim()) return; // Игнорируем пустые задачи
+
     const newTodo = {
       id: Date.now(),
       text: text,
       completed: false,
       createdAt: new Date(),
     };
+    setTodos(prev => [...prev, newTodo]);
+  };
 
-    setTodos([...todos, newTodo]);
-  }
+  /* 
+Параметр text: string
+Гарантирует, что в функцию передадут только строку (защита от null/undefined/числа).
 
+id: Date.now()
+Генерирует уникальный ID (в миллисекундах с 1970 года).
 
+Спреад-оператор (...todos)
+Создает новый массив, добавляя newTodo в конец (иммутабельное обновление).
+ */
+
+  const handleSaveTodo = (id: number, newText: string) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
+    );
+  };
+
+  const handleDeleteTodo = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
   return (
     <>
@@ -31,10 +73,11 @@ function App() {
         <aside className="wood-column right"></aside>
 
         <AddTodo onAdd={handleAddTodo} />
-
-        <div className="board">
-          {/* Здесь будут задачи */}
-        </div>
+        <TodoList
+          todos={todos}
+          onSave={handleSaveTodo}
+          onDelete={handleDeleteTodo}
+        />
       </main>
 
       <footer className="footer">
@@ -45,6 +88,3 @@ function App() {
 }
 
 export default App;
-
-
-/* {id: 1, text: "Помыть посуду", completed: false, createdAt: new Date()} */

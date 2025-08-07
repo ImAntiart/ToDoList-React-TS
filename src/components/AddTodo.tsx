@@ -23,7 +23,7 @@ export const AddTodo = ({ onAdd }: AddTodoProps) => {
           onChange={(e) => setInputText(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
           placeholder="Новая задача..." />
-          <button>Добавить</button>
+          <button onClick={handleSubmit} >Добавить</button>
         </div>
   );
 };

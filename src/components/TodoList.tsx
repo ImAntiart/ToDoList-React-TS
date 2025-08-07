@@ -1,17 +1,37 @@
-import TodoItem from './TodoItem'
+import { Todo, TodoItem } from './TodoItem';
 
-interface TodoListProps {
-  todos: string[]
+type TodoListProps = {
+  todos: Todo[];
+  onSave: (id: number, text: string) => void;
+  onDelete: (id: number) => void;
 }
 
-function TodoList({ todos }: TodoListProps) {
+
+/* export const TodoList = ({ todos }: TodoListProps) => {
+  return (
+    <div className='board'>
+      {todos.map((todo) => (
+        <div key={todo.id} className='todo-item'>
+          <h2>{todo.text}</h2>
+          <div>Выполнено:{todo.completed ? 'Да' : 'Нет'}</div>
+          <div>Дата: {formatDate(todo.createdAt)}</div>
+        </div>
+    ))}
+    </div>
+  );
+}; */
+
+export const TodoList = ({ todos, onSave, onDelete }: TodoListProps) => {
   return (
     <div className="board">
-      {todos.map((todo, index) => (
-        <TodoItem key={index} text={todo} />
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onSave={onSave}
+          onDelete={onDelete}
+        />
       ))}
     </div>
-  )
-}
-
-export default TodoList
+  );
+};

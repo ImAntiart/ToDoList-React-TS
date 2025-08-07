@@ -22,5 +22,12 @@
 @font-face {
   font-family: 'Amad';
   src: url('/src/assets/fonts/AmadeusAP.ttf') format('ttf'),
-  url('/src/fonts/TTLakes-Regular.woff') format('woff');
+  url('/src/fonts/AmadeusAP.otf') format('otf');
+}
+
+@font-face {
+  font-family: 'Fet';
+  src: url('/src/fonts/Fet.ttf') format('ttf'),
+  url('/src/fonts/Fet.otf') format('otf'),
+  url('/src/fonts/Fet.woff') format('woff');
 }
