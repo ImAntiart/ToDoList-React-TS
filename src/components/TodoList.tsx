@@ -6,21 +6,6 @@ type TodoListProps = {
   onDelete: (id: number) => void;
 }
 
-
-/* export const TodoList = ({ todos }: TodoListProps) => {
-  return (
-    <div className='board'>
-      {todos.map((todo) => (
-        <div key={todo.id} className='todo-item'>
-          <h2>{todo.text}</h2>
-          <div>Выполнено:{todo.completed ? 'Да' : 'Нет'}</div>
-          <div>Дата: {formatDate(todo.createdAt)}</div>
-        </div>
-    ))}
-    </div>
-  );
-}; */
-
 export const TodoList = ({ todos, onSave, onDelete }: TodoListProps) => {
   return (
     <div className="board">

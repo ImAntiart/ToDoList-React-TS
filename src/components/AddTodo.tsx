@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 type AddTodoProps = {
-  onAdd: (text: string) => void; // Функция, которую передаст App.tsx
+  onAdd: (text: string) => void; 
 };
 
 export const AddTodo = ({ onAdd }: AddTodoProps) => {
@@ -18,14 +18,6 @@ export const AddTodo = ({ onAdd }: AddTodoProps) => {
     setError("");
   };
 
-/* 
-  const handleSubmit = () => {
-    if (inputText.trim()) {
-      onAdd(inputText); // Передаем текст в App.tsx
-      setInputText(""); // Очищаем input
-    }
-  };
- */
   return (
     <div className="input-area">
       <input

@@ -14,8 +14,6 @@ type TodoItemProps = {
   onDelete: (id: number) => void;
 };
 
-
-
 export const TodoItem = ({todo, onSave, onDelete }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -23,7 +21,9 @@ export const TodoItem = ({todo, onSave, onDelete }: TodoItemProps) => {
   return date.toLocaleString('ru-RU', { 
     day: 'numeric', 
     month: 'long', 
-    year: 'numeric' 
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 };
 

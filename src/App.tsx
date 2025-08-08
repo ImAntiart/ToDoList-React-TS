@@ -4,34 +4,19 @@ import { Todo } from "./components/TodoItem";
 import { AddTodo } from "./components/AddTodo";
 import { TodoList } from "./components/TodoList";
 import { loadTodos, saveTodos } from "./utils/localStorage";
+import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 function App() {
-  // Загружаем задачи из localStorage при инициализации
-
   const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
+  
 
-/* 
-  () => loadTodos()
-Ленивая инициализация: загружает задачи из localStorage только при первом рендере (не на каждый ререндер).
-
-<Todo[]>
-Тип: массив объектов Todo.
- */
-
-  // Сохраняем задачи при каждом изменении
   useEffect(() => {
     saveTodos(todos);
   }, [todos]);
-/* 
-Срабатывает при любом изменении todos
-(добавление/удаление/редактирование).
-
-saveTodos(todos)
-Сохраняет актуальный массив в localStorage.
- */
 
   const handleAddTodo = (text: string) => {
-    if (!text.trim()) return; // Игнорируем пустые задачи
+    if (!text.trim()) return;
 
     const newTodo = {
       id: Date.now(),
@@ -39,19 +24,8 @@ saveTodos(todos)
       completed: false,
       createdAt: new Date(),
     };
-    setTodos(prev => [...prev, newTodo]);
+    setTodos((prev) => [...prev, newTodo]);
   };
-
-  /* 
-Параметр text: string
-Гарантирует, что в функцию передадут только строку (защита от null/undefined/числа).
-
-id: Date.now()
-Генерирует уникальный ID (в миллисекундах с 1970 года).
-
-Спреад-оператор (...todos)
-Создает новый массив, добавляя newTodo в конец (иммутабельное обновление).
- */
 
   const handleSaveTodo = (id: number, newText: string) => {
     setTodos(
@@ -64,7 +38,8 @@ id: Date.now()
   };
 
   return (
-    <>
+    <ThemeProvider>
+      <ThemeToggle />
       <header className="header">
         <h1>Список задач</h1>
       </header>
@@ -83,7 +58,7 @@ id: Date.now()
       <footer className="footer">
         <p>Разработчик Antiart, aka Ромашев Алексей Дмитриевич</p>
       </footer>
-    </>
+    </ThemeProvider>
   );
 }
 
