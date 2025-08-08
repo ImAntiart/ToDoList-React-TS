@@ -1,4 +1,3 @@
-
 html {
   font-size: 16px;
 }
@@ -141,7 +140,6 @@ body {
   align-items: start; /* Выравнивание по верху */
   padding: 10px;
   justify-content: center; /* Центрирование, если нужно */  
-/*   gap: 50px; */
 }
 
 
@@ -216,13 +214,6 @@ body {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* @media (max-width: 480px) {
-  .todo-item {
-    width: 240px; 
-  }
-} */
-
-
 .todo-actions {
   display: flex;
   gap: 8px;
@@ -251,4 +242,14 @@ body {
 
 .delete-button:hover {
   background-color: #ffcdd2;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.error-border {
+  border: 1px solid red;
 }

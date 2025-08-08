@@ -10,24 +10,24 @@ function App() {
 
   const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
 
+/* 
+  () => loadTodos()
+Ленивая инициализация: загружает задачи из localStorage только при первом рендере (не на каждый ререндер).
+
+<Todo[]>
+Тип: массив объектов Todo.
+ */
+
   // Сохраняем задачи при каждом изменении
   useEffect(() => {
     saveTodos(todos);
   }, [todos]);
+/* 
+Срабатывает при любом изменении todos
+(добавление/удаление/редактирование).
 
-  /* 
-  { 
-    id: 1, 
-    text: "Помыть посуду", 
-    completed: false, 
-    createdAt: new Date() 
-  }
- */
-
-  /*   
-useState<Todo[]>
-Типизирует состояние как массив объектов, соответствующих интерфейсу Todo (из TodoItem.tsx).
-Начальное значение — массив с одной задачей (демо-данные).
+saveTodos(todos)
+Сохраняет актуальный массив в localStorage.
  */
 
   const handleAddTodo = (text: string) => {
