@@ -27,11 +27,16 @@ function App() {
     setTodos((prev) => [...prev, newTodo]);
   };
 
-  const handleSaveTodo = (id: number, newText: string) => {
-    setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo))
-    );
-  };
+
+  const handleSaveTodo = (id: number, newText: string, completed: boolean) => {
+  setTodos(
+    todos.map(todo => 
+      todo.id === id 
+        ? { ...todo, text: newText, completed } 
+        : todo
+    )
+  );
+};
 
   const handleDeleteTodo = (id: number) => {
     setTodos(todos.filter((todo) => todo.id !== id));

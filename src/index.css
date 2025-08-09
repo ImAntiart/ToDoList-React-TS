@@ -17,6 +17,8 @@
   --note-button-bg: #ffeb3b;
   --note-button-border: #fdd835;
   --note-button-text: #c2a007;
+  --note-completed: #1bb10dd2;
+    --note-incompleted: #fc73da;
 
   /* === 🎨 Кнопки действий === */
   --edit-button-bg: #e0e0e0;
@@ -38,25 +40,27 @@
 
 /* === 🌙 Тёмная тема === */
 .dark-theme {
-  --wood-bg: #3a2a1a;
-  --wood-border: #5d4037;
+  --wood-bg: #525151;
+  --wood-border: #e0cac3;
   --wood-shadow: rgba(0, 0, 0, 0.4);
   --wood-bg-image-hor: url('./assets/woodHorizonBlack.jpg');
   --wood-bg-image-ver: url('./assets/woodVerticalBlack.jpg');
   --wood-note-bg: url('./assets/brevenchataiaStena.webp');
   
-  --note-bg: #ce7b0e;
-  --note-border: #c2723c;
-  --note-text: #3e2723;
+  --note-bg: #a6a2db;
+  --note-border: #8e89d8;
+  --note-text: #11053d;
   --note-text-main: #061b41;
-  --note-button-bg: #5d4037;
-  --note-button-border: #3e2723;
-  --note-button-text: #d7ccc8;
+  --note-button-bg: #6a62d6;
+  --note-button-border: #300daf;
+  --note-button-text: #11053d;
+  --note-completed: #9fff05d2;
+  --note-incompleted: #ffa9e9;
 
-  --edit-button-bg: #5d4037;
-  --edit-button-hover: #3e2723;
-  --delete-button-bg: #3e2723;
-  --delete-button-hover: #1b0000;
+  --edit-button-bg: #6a62d6;
+  --edit-button-hover: #372faa;
+  --delete-button-bg: #aa65f8;
+  --delete-button-hover: #773abd;
   --error-color: #ff6e6e;
 }
 

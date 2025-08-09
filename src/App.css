@@ -173,12 +173,26 @@ body {
   font-size: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: var(--note-text-main);
+  cursor: pointer;
 }
 
 .todo-item:hover {
   transform: rotate(-1.5deg) translateY(-2px);
   box-shadow: var(--shadow-md), var(--shadow-inset);
 }
+
+.todo-item .completedStatus {
+  cursor: pointer;
+  color: var(--note-incompleted);
+}
+
+.todo-item.completed .completedStatus {
+  /* text-decoration: line-through; */
+  color: var(--note-completed);
+  cursor: pointer;
+} 
+ 
+
 
 /* Кнопки действий */
 .todo-actions {
