@@ -34,8 +34,16 @@
   --shadow-wood: 0 4px 16px var(--wood-shadow), var(--shadow-inset);
 
   /* === ✒️ Шрифты === */
-  --font-main: 'Amad';
+  --font-main: 'Courier';
   --font-item: 'Fet';
+  --font-button: 'Amad';
+
+  --toggle-bg: #4e4d49;
+  --toggle-border: rgb(39, 38, 38)d49;
+
+  --text-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.6),
+    2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* === 🌙 Тёмная тема === */
@@ -45,7 +53,7 @@
   --wood-shadow: rgba(0, 0, 0, 0.4);
   --wood-bg-image-hor: url('./assets/woodHorizonBlack.jpg');
   --wood-bg-image-ver: url('./assets/woodVerticalBlack.jpg');
-  --wood-note-bg: url('./assets/brevenchataiaStena.webp');
+  --wood-note-bg: url('./assets/white.jpg');
   
   --note-bg: #a6a2db;
   --note-border: #8e89d8;
@@ -54,14 +62,19 @@
   --note-button-bg: #6a62d6;
   --note-button-border: #300daf;
   --note-button-text: #11053d;
-  --note-completed: #9fff05d2;
-  --note-incompleted: #ffa9e9;
+  --note-completed: #216b0f;
+  --note-incompleted: #b9014e;
 
   --edit-button-bg: #6a62d6;
   --edit-button-hover: #372faa;
   --delete-button-bg: #aa65f8;
   --delete-button-hover: #773abd;
   --error-color: #ff6e6e;
+
+
+  --toggle-bg: #e7e1ca;
+  --toggle-border: rgb(229, 231, 212)d49;
+
 }
 
 /* Анимация переключения */

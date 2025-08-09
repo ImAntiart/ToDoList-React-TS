@@ -9,7 +9,19 @@ import { ThemeToggle } from "./components/ThemeToggle";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
+  const [filter, setFilter] = useState<'all' | 'completed' | 'active'>('all');
   
+    // Функция фильтрации
+  const getFilteredTodos = () => {
+    switch (filter) {
+      case 'completed':
+        return todos.filter(todo => todo.completed);
+      case 'active':
+        return todos.filter(todo => !todo.completed);
+      default:
+        return todos;
+    }
+  };
 
   useEffect(() => {
     saveTodos(todos);
@@ -52,9 +64,12 @@ function App() {
         <aside className="wood-column left"></aside>
         <aside className="wood-column right"></aside>
 
-        <AddTodo onAdd={handleAddTodo} />
+        <AddTodo 
+        onAdd={handleAddTodo} 
+        onFilterChange={setFilter} // Передаем setFilter
+        />
         <TodoList
-          todos={todos}
+          todos={getFilteredTodos()} // Используем отфильтрованный список
           onSave={handleSaveTodo}
           onDelete={handleDeleteTodo}
         />

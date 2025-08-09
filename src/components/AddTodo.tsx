@@ -2,9 +2,10 @@ import { useState } from "react";
 
 type AddTodoProps = {
   onAdd: (text: string) => void; 
+  onFilterChange: (filter: 'all' | 'completed' | 'active') => void;
 };
 
-export const AddTodo = ({ onAdd }: AddTodoProps) => {
+export const AddTodo = ({ onAdd, onFilterChange }: AddTodoProps) => {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState("");
 
@@ -33,6 +34,20 @@ export const AddTodo = ({ onAdd }: AddTodoProps) => {
       />
        {error && <div className="error-text">{error}</div>}
       <button onClick={handleSubmit}>Добавить</button>
+
+       <div className="filter-controls">
+        <label>Фильтр:</label>
+        <select
+          onChange={(e) => 
+            onFilterChange(e.target.value as 'all' | 'completed' | 'active')
+          }
+          aria-label="Фильтр задач"
+        >
+          <option value="all">Все</option>
+          <option value="completed">Выполненные</option>
+          <option value="active">Не выполненные</option>
+        </select>
+      </div>
     </div>
   );
 };

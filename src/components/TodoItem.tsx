@@ -21,8 +21,7 @@ export const TodoItem = ({ todo, onSave, onDelete }: TodoItemProps) => {
   const toggleCompleted = () => {
     const newCompleted = !completed;
     setCompleted(newCompleted);
-    // Вызываем onSave для обновления состояния в App.tsx
-    onSave(todo.id, todo.text, newCompleted); // Изменяем сигнатуру onSave
+    onSave(todo.id, todo.text, newCompleted);
   };
 
   const formatDate = (date: Date) => {
@@ -40,7 +39,7 @@ export const TodoItem = ({ todo, onSave, onDelete }: TodoItemProps) => {
       <EditTodo
         todo={todo}
         onSave={(id, newText) => {
-          onSave(id, newText, completed); 
+          onSave(id, newText, completed);
           setIsEditing(false);
         }}
         onCancel={() => setIsEditing(false)}
@@ -49,12 +48,17 @@ export const TodoItem = ({ todo, onSave, onDelete }: TodoItemProps) => {
   }
 
   return (
-    <div
-      className={`todo-item ${completed ? "completed" : ""}`}
-      onClick={toggleCompleted}
-    >
+    <div className={`todo-item ${completed ? "completed" : ""}`}>
       <h2>{todo.text}</h2>
-      <div className="completedStatus">{completed ? "Выполнено" : "Не выполнено"}</div>
+      <div
+        className="completedStatus"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleCompleted();
+        }}
+      >
+        {completed ? "Выполнено" : "Не выполнено"}
+      </div>
       <div>Дата: {formatDate(todo.createdAt)}</div>
       <div className="todo-actions">
         <button
@@ -62,16 +66,15 @@ export const TodoItem = ({ todo, onSave, onDelete }: TodoItemProps) => {
           className="edit-button"
           aria-label="Edit"
         >
-          ✏️ Редактировать
+          Редактировать
         </button>
-<button 
+        <button
           onClick={(e) => {
             e.stopPropagation();
             onDelete(todo.id);
           }}
           className="delete-button"
         >
-          🗑️ Удалить
         </button>
       </div>
     </div>
