@@ -275,27 +275,6 @@ body {
   border: 1px solid var(--error-color, red);
 }
 
-/* Адаптив */
-@media (max-width: 768px) {
-  .main {
-    grid-template-columns: 1fr;
-    padding: 10px;
-  }
-
-  .input-area {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .board {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-}
-
-@media (max-width: 600px) {
-  .wood-column { display: none; }
-}
-
 
 .task-controls {
   display: flex;
@@ -337,46 +316,81 @@ body {
   font-family: var(--font-main);
 }
 
-
-
-
-@media (min-width: 450px) {
-  .board {
-    padding: 0 5px;
+@media (max-width: 480px) {
+  .footer, .header {
+    align-items: flex-start;
   }
-  
-  .todo-item {
-    width: 95%;
-  }
-}
 
-@media  (min-width: 600px) {
+  .footer p, .header h1 {
+    text-align: left;
+    padding-left: 10px;
+  }
+
+
   .main {
-    padding: 0.5rem 0; /* Убираем боковые отступы */
+    align-items: center;
+    padding: 0;
+    margin: 0;
   }
-  
-  .board {
+
+    .board {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    gap: 30px;
-    padding: 0 10px;
+    gap: 10px;
+    padding: 0;
+  }
+
+}
+
+
+@media (max-width: 599px) {
+  /* Мобильные: 1 колонка */
+
+  
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  /* Планшеты: 2 колонки */
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Небольшие десктопы: 3 колонки */
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Средние десктопы: 4 колонки */
+  .board {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  /* Большие экраны: 5+ колонок */
+  .board {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+/* Боковые колонки показываем только на широких экранах */
+@media (max-width: 1023px) {
+  .wood-column {
+    display: none;
   }
   
-  .todo-item {
-    width: 80%; /* Шире на маленьких экранах */
-    max-width: 220px;
+  .main {
+    grid-template-columns: 1fr;
+    padding: 0.5rem 1rem;
   }
 }
 
-@media  (min-width: 769px) {
-    .main {
-    padding: 1rem 3.5rem; 
-  }
-}
-
-@media  (min-width: 1140px) {
-    .main {
-    padding: 1rem 3.5rem; 
+@media (min-width: 1024px) {
+  .wood-column {
+    display: block;
   }
 }
