@@ -69,6 +69,7 @@ export const TodoItem = ({ todo, onSave, onDelete }: TodoItemProps) => {
           Редактировать
         </button>
         <button
+          title="удалить"
           onClick={(e) => {
             e.stopPropagation();
             onDelete(todo.id);
