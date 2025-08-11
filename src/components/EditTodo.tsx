@@ -3,11 +3,10 @@ import { Todo } from './TodoItem';
 
 
 type EditTodoProps = {
-    todo: Todo;  // Получаем объект задачи для редактирования
-    onSave: (id: number, newText: string, completed: boolean) => void; // Колбэк для сохранения
-    onCancel: () => void;  // Колбэк для отмены
+    todo: Todo;  
+    onSave: (id: number, newText: string, completed: boolean) => void; 
+    onCancel: () => void;  
 };
-
 
 export const EditTodo = ({ todo, onSave, onCancel}: EditTodoProps) => {
     const [editedText, setEditedText] = useState(todo.text); 
@@ -51,24 +50,3 @@ export const EditTodo = ({ todo, onSave, onCancel}: EditTodoProps) => {
         </div>
     );
 };
-
-
-/* return (
-         <div className={`todo-item ${todo.completed ? "completed" : ""}`}>
-<h2>
-            <input
-            aria-label='ваш текст'
-                type="text"
-                value={editedText}
-                onChange={(e) => setEditedText(e.target.value)}
-                className="edit-input"
-                autoFocus
-            />
-        </h2>
-            <div className="edit-actions">
-                <button onClick={handleSave}>Сохранить</button>
-                <button onClick={onCancel}>Отмена</button>
-            </div>
-        </div>
-    );
-}; */

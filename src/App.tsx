@@ -10,17 +10,31 @@ import { ThemeToggle } from "./components/ThemeToggle";
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
   const [filter, setFilter] = useState<'all' | 'completed' | 'active'>('all');
+  const [dateFilter, setDateFilter] = useState<'all' | 'today' | 'week' | 'month'>('all');
   
-    // Функция фильтрации
+  // Обновленная функция фильтрации
   const getFilteredTodos = () => {
-    switch (filter) {
-      case 'completed':
-        return todos.filter(todo => todo.completed);
-      case 'active':
-        return todos.filter(todo => !todo.completed);
-      default:
-        return todos;
-    }
+    const now = new Date();
+    const startOfDay = new Date(now.setHours(0, 0, 0, 0));
+    const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+    return todos.filter(todo => {
+      // Фильтр по статусу (старая логика)
+      const statusMatch = 
+        filter === 'all' || 
+        (filter === 'completed' && todo.completed) || 
+        (filter === 'active' && !todo.completed);
+      
+      // Новая логика фильтрации по дате
+      const dateMatch = 
+        dateFilter === 'all' ||
+        (dateFilter === 'today' && todo.createdAt >= startOfDay) ||
+        (dateFilter === 'week' && todo.createdAt >= startOfWeek) ||
+        (dateFilter === 'month' && todo.createdAt >= startOfMonth);
+      
+      return statusMatch && dateMatch;
+    });
   };
 
   useEffect(() => {
@@ -66,10 +80,11 @@ function App() {
 
         <AddTodo 
         onAdd={handleAddTodo} 
-        onFilterChange={setFilter} // Передаем setFilter
+        onFilterChange={setFilter} 
+        onDateFilterChange={setDateFilter}
         />
         <TodoList
-          todos={getFilteredTodos()} // Используем отфильтрованный список
+          todos={getFilteredTodos()} 
           onSave={handleSaveTodo}
           onDelete={handleDeleteTodo}
         />
