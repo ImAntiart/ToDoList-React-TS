@@ -457,6 +457,11 @@ body {
   gap: 8px;
 }
 
+.filter-group-date {
+  display: flex;
+  flex-direction: column;
+}
+
 .filter-group label {
   white-space: nowrap;
 }

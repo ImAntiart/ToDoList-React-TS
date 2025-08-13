@@ -3,13 +3,13 @@ import { useState } from "react";
 type AddTodoProps = {
   onAdd: (text: string) => void; 
   onFilterChange: (filter: 'all' | 'completed' | 'active') => void;
-  onDateFilterChange: (dateFilter: 'all' | 'today' | 'week' | 'month') => void;
+  onSortChange: (sortOrder: 'newest' | 'oldest') => void;
 };
 
 export const AddTodo = ({ 
   onAdd, 
   onFilterChange,
-  onDateFilterChange,
+  onSortChange,
 }: AddTodoProps) => {
   const [inputText, setInputText] = useState("");
   const [error, setError] = useState("");
@@ -58,16 +58,14 @@ export const AddTodo = ({
           </select>
         </div>
 
-        <div className="filter-group">
-          <label>Дата:</label>
+        <div className="filter-group-date">
+          <label>Сортировка:</label>
           <select
           title="выберите критерий сортировки"
-            onChange={(e) => onDateFilterChange(e.target.value as 'all' | 'today' | 'week' | 'month')}
+            onChange={(e) => onSortChange(e.target.value as 'newest' | 'oldest')}
           >
-            <option value="all">Все даты</option>
-            <option value="today">Сегодня</option>
-            <option value="week">Эта неделя</option>
-            <option value="month">Этот месяц</option>
+            <option value="newest">Новые сначала</option>
+            <option value="oldest">Старые сначала</option>
           </select>
         </div>
       </div>

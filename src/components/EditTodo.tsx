@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Todo } from './TodoItem'; 
 
 
+
 type EditTodoProps = {
     todo: Todo;  
     onSave: (id: number, newText: string, completed: boolean) => void; 

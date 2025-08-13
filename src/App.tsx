@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { Todo } from "./components/TodoItem";
 import { AddTodo } from "./components/AddTodo";
+/* import { SortOrder } from "./components/AddTodo"; */
 import { TodoList } from "./components/TodoList";
 import { loadTodos, saveTodos } from "./utils/localStorage";
 import { ThemeProvider } from "./components/ThemeContext";
@@ -10,30 +11,22 @@ import { ThemeToggle } from "./components/ThemeToggle";
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
   const [filter, setFilter] = useState<'all' | 'completed' | 'active'>('all');
-  const [dateFilter, setDateFilter] = useState<'all' | 'today' | 'week' | 'month'>('all');
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
   
   // Обновленная функция фильтрации
-  const getFilteredTodos = () => {
-    const now = new Date();
-    const startOfDay = new Date(now.setHours(0, 0, 0, 0));
-    const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const getProcessedTodos = () => {
+    // Фильтрация по статусу
+    const filtered = todos.filter(todo => {
+      return filter === 'all' || 
+             (filter === 'completed' && todo.completed) || 
+             (filter === 'active' && !todo.completed);
+    });
 
-    return todos.filter(todo => {
-      // Фильтр по статусу (старая логика)
-      const statusMatch = 
-        filter === 'all' || 
-        (filter === 'completed' && todo.completed) || 
-        (filter === 'active' && !todo.completed);
-      
-      // Новая логика фильтрации по дате
-      const dateMatch = 
-        dateFilter === 'all' ||
-        (dateFilter === 'today' && todo.createdAt >= startOfDay) ||
-        (dateFilter === 'week' && todo.createdAt >= startOfWeek) ||
-        (dateFilter === 'month' && todo.createdAt >= startOfMonth);
-      
-      return statusMatch && dateMatch;
+    // Сортировка по дате
+    return [...filtered].sort((a, b) => {
+      return sortOrder === 'newest'
+        ? b.createdAt.getTime() - a.createdAt.getTime()
+        : a.createdAt.getTime() - b.createdAt.getTime();
     });
   };
 
@@ -78,16 +71,16 @@ function App() {
         <aside className="wood-column left"></aside>
         <aside className="wood-column right"></aside>
 
-        <AddTodo 
-        onAdd={handleAddTodo} 
-        onFilterChange={setFilter} 
-        onDateFilterChange={setDateFilter}
-        />
-        <TodoList
-          todos={getFilteredTodos()} 
-          onSave={handleSaveTodo}
-          onDelete={handleDeleteTodo}
-        />
+      <AddTodo 
+        onAdd={handleAddTodo}
+        onFilterChange={setFilter}
+        onSortChange={setSortOrder}
+      />
+      <TodoList
+        todos={getProcessedTodos()}
+        onSave={handleSaveTodo}
+        onDelete={handleDeleteTodo}
+      />
       </main>
 
       <footer className="footer">
