@@ -9,23 +9,34 @@ type EditTodoProps = {
 };
 
 export const EditTodo = ({ todo, onSave, onCancel}: EditTodoProps) => {
-    const [editedText, setEditedText] = useState(todo.text); 
+    const [editedText, setEditedText] = useState(todo.text);
+    const [error, setError] = useState(''); 
 
     const handleSave = () => {
-        onSave(todo.id, editedText,  todo.completed); 
-    }
-
+        if (!editedText.trim()) { // Проверяем, не пустое ли поле
+            setError('Текст задачи не может быть пустым!');
+            return; // Прерываем сохранение
+        }
+        setError(''); // Очищаем ошибку, если всё в порядке
+        onSave(todo.id, editedText, todo.completed); 
+    };
 
     return (
         <div className={`todo-item edit-mode`}>
             <input
+                minLength={1}
                 placeholder='Ваш текст...'
                 type="text"
                 value={editedText}
-                onChange={(e) => setEditedText(e.target.value)}
-                className="edit-todo-input"
+                onChange={(e) => {
+                    setEditedText(e.target.value);
+                    setError(''); 
+                }}
+                className={`edit-todo-input ${error ? 'error' : ''}`} 
                 autoFocus
             />
+
+            {error && <div className="error-message" style={{ color: 'red' }}>{error}</div>}
             
             <div className="completedStatus">
                 {todo.completed ? "Выполнено" : "Не выполнено"}
